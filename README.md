@@ -56,24 +56,3 @@ Este projeto visa prever a probabilidade de demissão de funcionários com base 
 1. Testar modelos mais avançados, como **Random Forest** ou **Gradient Boosting**.
 2. Explorar novas variáveis por meio de engenharia de features.
 3. Refinar o balanceamento de classes com técnicas adicionais.
-
-## Como Utilizar
-1. Clone este repositório: 
-   ```bash
-   git clone https://github.com/seu-usuario/employee-attrition-analysis.git
-   ```
-2. Instale as dependências:
-   ```bash
-   pip install -r requirements.txt
-   ```
-3. Execute o script principal:
-   ```bash
-   python employee_attrition_analysis.py
-   ```
-
-## Contribuição
-Contribuições são bem-vindas! Sinta-se à vontade para abrir issues ou enviar pull requests.
-
-## Licença
-Este projeto está licenciado sob a Licença MIT. Consulte o arquivo `LICENSE` para mais informações.
-
