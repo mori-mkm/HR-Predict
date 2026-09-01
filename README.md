@@ -1,58 +1,123 @@
-# Análise de Rotatividade de Funcionários
+# Employee Attrition Prediction
 
-Este projeto visa prever a probabilidade de demissão de funcionários com base em dados históricos, utilizando aprendizado de máquina. O objetivo é identificar os principais fatores que contribuem para a rotatividade e fornecer insights acionáveis para melhorar a retenção de talentos.
+Machine learning project focused on identifying employees at higher risk of leaving the organization and understanding the factors most associated with employee attrition.
 
-## Etapas do Projeto
+The project uses **Logistic Regression**, class balancing with **SMOTE**, threshold optimization and model interpretation to support a more data-driven approach to employee retention.
 
-### 1. Preparação dos Dados
-- Realizada seleção e codificação de variáveis categóricas e contínuas.
-- Divisão dos dados em conjuntos de treino e teste (80/20).
+## Overview
 
-### 2. Construção do Modelo Inicial
-- Utilizado um modelo de regressão logística para prever a probabilidade de demissão.
-- Avaliação inicial com métricas de desempenho: Acurácia, F1-Score, Precisão e Recall.
+Employee attrition is an imbalanced classification problem: employees who leave typically represent a smaller portion of the workforce.
 
-### 3. Balanceamento de Classes
-- Aplicado **SMOTE** (Synthetic Minority Oversampling Technique) para lidar com o desbalanceamento das classes.
-- Re-treinamento do modelo com os dados balanceados.
+Rather than optimizing only for overall accuracy, this project places greater emphasis on **recall**, aiming to identify a larger share of employees who are actually at risk of leaving.
 
-### 4. Ajuste de Threshold
-- Ajustado o threshold de decisão para melhorar o recall (identificação de funcionários propensos à saída).
+The workflow includes:
 
-### 5. Identificação de Variáveis Relevantes
-- Coeficientes da regressão logística foram analisados para identificar as variáveis com maior impacto na probabilidade de demissão.
-- Gráficos foram gerados para visualização das 10 variáveis mais relevantes.
+* Data preprocessing and feature encoding
+* Train/test split
+* Logistic Regression baseline
+* Class balancing with SMOTE
+* Decision threshold optimization
+* Feature importance analysis
+* Cross-validation
+* Final model evaluation
 
-### 6. Validação do Modelo
-- Validação cruzada (5-fold) realizada para verificar a robustez do modelo.
-- Avaliação final no conjunto de teste com métricas de desempenho (Acurácia e F1-Score).
+## Methodology
 
-## Resultados
+### 1. Data Preparation
 
-### Métricas do Modelo Balanceado e Threshold Ajustado
-- **Acurácia**: 0.73
-- **F1-Score**: 0.36
-- **Recall**: Melhorado para 0.74, indicando maior capacidade de identificar funcionários propensos à demissão.
+Categorical and numerical variables were prepared for modeling, and the dataset was divided into:
 
-### Variáveis Mais Relevantes
+* **80% training data**
+* **20% test data**
+
+### 2. Baseline Model
+
+A **Logistic Regression** model was trained as the initial classifier.
+
+Performance was evaluated using:
+
+* Accuracy
+* Precision
+* Recall
+* F1-Score
+
+### 3. Class Imbalance
+
+Because attrition cases represent the minority class, **SMOTE (Synthetic Minority Oversampling Technique)** was applied to the training data.
+
+The model was then retrained using the balanced dataset.
+
+### 4. Threshold Optimization
+
+The classification threshold was adjusted to improve **recall**, increasing the model's ability to identify employees who were likely to leave.
+
+### 5. Model Interpretation
+
+Logistic Regression coefficients were analyzed to identify variables with the strongest relationship with employee attrition.
+
+### 6. Validation
+
+A **5-fold cross-validation** strategy was used to evaluate the consistency of the model across different subsets of the data.
+
+## Results
+
+| Metric              |          Result |
+| ------------------- | --------------: |
+| Accuracy            |        **0.73** |
+| F1-Score            |        **0.36** |
+| Recall              |        **0.74** |
+| Cross-validation F1 | **0.32 ± 0.03** |
+
+The optimized model reached a **recall of 74%**, prioritizing the identification of employees at risk of attrition over maximizing overall accuracy.
+
+## Key Attrition Factors
+
+Among the variables with the strongest influence on the model were:
+
 1. `OverTime_Yes`
 2. `Department_Research & Development`
 3. `Department_Sales`
 4. `MaritalStatus_Married`
 5. `YearsInCurrentRole`
 
-### Validação Cruzada
-- **F1-Score Médio**: 0.32
-- **Desvio Padrão do F1-Score**: 0.03
+These variables help illustrate how interpretable machine learning models can be used not only for prediction, but also to investigate patterns associated with employee turnover.
 
-## Tecnologias Utilizadas
-- **Python**
-  - `pandas`, `numpy`: Manipulação e análise de dados.
-  - `scikit-learn`: Modelagem e métricas de aprendizado de máquina.
-  - `imblearn`: Balanceamento de classes com SMOTE.
-  - `matplotlib`, `seaborn`: Visualização de dados.
+## Tech Stack
 
-## Próximos Passos
-1. Testar modelos mais avançados, como **Random Forest** ou **Gradient Boosting**.
-2. Explorar novas variáveis por meio de engenharia de features.
-3. Refinar o balanceamento de classes com técnicas adicionais.
+**Python**
+
+* `pandas` — data manipulation
+* `numpy` — numerical operations
+* `scikit-learn` — preprocessing, modeling and evaluation
+* `imbalanced-learn` — SMOTE and class balancing
+* `matplotlib` — data visualization
+* `seaborn` — exploratory visualization
+
+## Repository
+
+```text
+HR-Predict/
+├── HR_Analytics_Employee.ipynb
+├── WA_Fn-UseC_-HR-Employee-Attrition.csv
+└── README.md
+```
+
+The complete analysis and modeling workflow is available in the Jupyter Notebook.
+
+## Next Steps
+
+Potential improvements include:
+
+* Comparing Logistic Regression with **Random Forest** and **Gradient Boosting**
+* Expanding feature engineering
+* Testing alternative class-balancing strategies
+* Evaluating probability calibration
+* Comparing different decision thresholds based on business costs
+* Adding explainability methods such as SHAP
+* Translating model outputs into employee retention risk segments
+
+## Business Perspective
+
+In a real People Analytics environment, a model like this should not be used to make automatic employment decisions.
+
+Its value is primarily as a **decision-support tool**, helping HR teams identify workforce patterns, investigate potential drivers of attrition and prioritize retention analyses.
